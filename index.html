@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NICASARI Locadora de Veículos</title>
+  <meta name="description" content="Aluguel de carros com praticidade, segurança e preço justo. Reserve online com a NICASARI Locadora de Veículos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0A0A0A;
+      --bg-contrast:#0F1320;
+      --primary:#0B5FA5; /* azul principal */
+      --primary-2:#2A7DD8; /* azul claro */
+      --text:#EAF0F7;
+      --muted:#A9B4C7;
+      --card:#111827;
+      --accent:#19C3F3; /* ciano sutil para detalhes */
+      --success:#00C389;
+      --warning:#F6B73C;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),var(--bg-contrast));color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    a{color:var(--text);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(180%) blur(12px);
+      background:rgba(10,10,10,.6);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:160px}
+    .tagline{font-size:14px;color:var(--muted)}
+    .menu{display:flex;gap:24px}
+    .menu a{font-weight:600;color:#DDE7F5}
+    .cta{display:flex;gap:12px}
+    .btn{
+      padding:10px 16px;border-radius:10px;border:1px solid transparent;
+      font-weight:700;transition:.25s ease;cursor:pointer
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-color:rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(11,95,165,.35)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(11,95,165,.45)}
+    .btn-outline{background:transparent;color:#EAF0F7;border-color:rgba(255,255,255,.18)}
+    .btn-outline:hover{border-color:var(--accent);color:#fff}
+
+    /* Hero */
+    .hero{padding:72px 0 36px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+    .hero h1{font-family:Poppins,Inter,sans-serif;font-size:44px;line-height:1.1;margin:16px 0}
+    .hero p{color:#C9D3E3;max-width:560px}
+    .hero .chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px}
+    .chip{border:1px solid rgba(255,255,255,.12);color:#D7E2F1;padding:8px 12px;border-radius:999px;font-size:13px}
+    .hero-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center;margin-top:18px
+    }
+    .hero-card svg{width:28px;height:28px;color:var(--accent)}
+    .hero-art{
+      background:radial-gradient(1200px 600px at 80% 0%,rgba(25,195,243,.25),transparent 60%),
+                 radial-gradient(700px 400px at 0% 100%,rgba(11,95,165,.25),transparent 60%);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;padding:24px
+    }
+
+    /* Sections */
+    section{padding:56px 0;border-top:1px solid rgba(255,255,255,.06)}
+    .section-title{font-family:Poppins,Inter,sans-serif;font-size:28px;margin:0 0 10px}
+    .section-sub{color:var(--muted);margin:0 0 24px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{
+      background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;
+      padding:18px;transition:.25s ease
+    }
+    .card:hover{transform:translateY(-2px);border-color:rgba(25,195,243,.35)}
+    .card h3{margin:8px 0;font-size:18px}
+    .card p{color:#C9D3E3}
+
+    /* Fleet */
+    .fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .fleet .car{
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px
+    }
+    .fleet .car h4{margin:8px 0 6px;font-size:18px}
+    .price{color:#fff;font-weight:700}
+    .meta{color:var(--muted);font-size:14px}
+
+    /* Testimonials */
+    .testi{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .quote{font-style:italic;color:#DDE7F5}
+    .author{margin-top:8px;color:#9FB0C6;font-weight:600}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .form{
+      background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px
+    }
+    .form label{display:block;color:#DDE7F5;margin:8px 0 6px}
+    .form input,.form textarea, .form select{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.14);
+      background:#0D1220;color:#EAF0F7
+    }
+    .form input::placeholder,.form textarea::placeholder{color:#97A6BC}
+    .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    footer{padding:28px 0;color:#A9B4C7}
+    .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+    .foot h5{margin:0 0 10px;font-size:16px;color:#DDE7F5}
+    .legal{margin-top:24px;border-top:1px solid rgba(255,255,255,.06);padding-top:16px;font-size:13px;color:#9BA9BD}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3,.fleet,.testi,.foot{grid-template-columns:1fr 1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .menu{display:none}
+      .cta{display:none}
+      .grid-3,.fleet,.testi,.foot{grid-template-columns:1fr}
+      .hero h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <!-- Inline SVG logo NICASARI LOCADORA -->
+        <svg class="logo" viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" aria-label="NICASARI Locadora de Veículos">
+          <defs>
+            <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2A7DD8"/>
+              <stop offset="100%" stop-color="#0B5FA5"/>
+            </linearGradient>
+          </defs>
+          <!-- Car silhouette -->
+          <path d="M40 60 C120 20, 240 20, 360 60 L400 60 C420 60, 430 70, 430 80 L110 80 C90 80, 80 70, 80 64 Z"
+                fill="url(#g)"/>
+          <circle cx="150" cy="86" r="10" fill="#0C2A4A"/>
+          <circle cx="380" cy="86" r="10" fill="#0C2A4A"/>
+          <!-- Brand text -->
+          <text x="10" y="115" font-family="Poppins" font-weight="700" font-size="28" fill="#DDE7F5">NICASARI</text>
+          <text x="205" y="115" font-family="Inter" font-weight="600" font-size="16" fill="#9FB0C6">LOCADORA DE VEÍCULOS</text>
+        </svg>
+        <div class="tagline">Mobilidade sem fronteiras</div>
+      </div>
+      <nav class="menu">
+        <a href="#vantagens">Vantagens</a>
+        <a href="#frota">Frota</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div class="cta">
+        <a class="btn btn-outline" href="#frota">Ver frota</a>
+        <a class="btn btn-primary" href="#contato">Reservar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Alugue o carro certo, no momento certo.</h1>
+        <p>Com a NICASARI Locadora de Veículos, você tem praticidade, segurança e preço transparente. Reserve online, retire rápido e siga viagem sem complicações.</p>
+        <div class="chips">
+          <span class="chip">Cancelamento grátis*</span>
+          <span class="chip">Sem taxas ocultas</span>
+          <span class="chip">Atendimento 24/7</span>
+        </div>
+        <div class="hero-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 8v8M8 12h8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <strong>Reserve em 2 minutos:</strong>
+            <div class="meta">Escolha o carro, datas e finalize — simples e rápido.</div>
+          </div>
+        </div>
+        <div style="margin-top:18px;display:flex;gap:12px">
+          <a class="btn btn-primary" href="#contato">Reservar agora</a>
+          <a class="btn btn-outline" href="#frota">Ver modelos</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <!-- Decorative pseudo mock of car lineup -->
+        <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2A7DD8"/><stop offset="100%" stop-color="#0B5FA5"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="600" height="260" rx="14" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"/>
+          <path d="M60 150 C140 110, 260 110, 360 150 L410 150 C430 150, 440 160, 440 170 L120 170 C100 170, 90 160, 90 154 Z"
+                fill="url(#lg1)"/>
+          <circle cx="180" cy="176" r="12" fill="#0C2A4A"/>
+          <circle cx="390" cy="176" r="12" fill="#0C2A4A"/>
+          <text x="50" y="220" font-family="Inter" font-size="18" fill="#C9D3E3">Frota moderna e revisada constantemente</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vantagens -->
+  <section id="vantagens">
+    <div class="container">
+      <h2 class="section-title">Por que escolher a NICASARI</h2>
+      <p class="section-sub">Transparência, conforto e suporte quando você mais precisa.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Atendimento 24/7</h3>
+          <p>Suporte contínuo por WhatsApp e telefone em qualquer etapa da sua locação.</p>
+        </div>
+        <div class="card">
+          <h3>Preços claros</h3>
+          <p>Sem pegadinhas: veja tudo antes de confirmar a reserva.</p>
+        </div>
+        <div class="card">
+          <h3>Segurança e revisão</h3>
+          <p>Carros revisados, higienizados e com seguro para sua tranquilidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frota -->
+  <section id="frota">
+    <div class="container">
+      <h2 class="section-title">Nossa frota</h2>
+      <p class="section-sub">Encontre o equilíbrio entre conforto, economia e desempenho.</p>
+      <div class="fleet">
+        <div class="car">
+          <div class="meta">Compacto Econômico</div>
+          <h4>CityDrive 1.0</h4>
+          <div class="meta">Ar, direção, 4 portas • Manual</div>
+          <div class="price">R$ 119/dia</div>
+          <div style="margin-top:10px;display:flex;gap:10px">
+            <button class="btn btn-outline">Detalhes</button>
+            <button class="btn btn-primary">Reservar</button>
+          </div>
+        </div>
+        <div class="car">
+          <div class="meta">Sedã Conforto</div>
+          <h4>UrbanPlus 1.6</h4>
+          <div class="meta">Ar dual, multimídia • Automático</div>
+          <div class="price">R$ 169/dia</div>
+          <div style="margin-top:10px;display:flex;gap:10px">
+            <button class="btn btn-outline">Detalhes</button>
+            <button class="btn btn-primary">Reservar</button>
+          </div>
+        </div>
+        <div class="car">
+          <div class="meta">SUV Familiar</div>
+          <h4>TrailX 1.6 Turbo</h4>
+          <div class="meta">Espaço, segurança, conforto • Automático</div>
+          <div class="price">R$ 229/dia</div>
+          <div style="margin-top:10px;display:flex;gap:10px">
+            <button class="btn btn-outline">Detalhes</button>
+            <button class="btn btn-primary">Reservar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos">
+    <div class="container">
+      <h2 class="section-title">O que dizem nossos clientes</h2>
+      <p class="section-sub">Experiências reais de quem já rodou com a NICASARI.</p>
+      <div class="testi">
+        <div class="card">
+          <p class="quote">“Processo muito rápido e sem burocracia. Carro impecável!”</p>
+          <div class="author">Nicolly • Curitiba, PR</div>
+        </div>
+        <div class="card">
+          <p class="quote">“Preço justo, atendimento excelente. Voltarei a alugar.”</p>
+          <div class="author">Marcos • São José dos Pinhais</div>
+        </div>
+        <div class="card">
+          <p class="quote">“Reserva online fácil e retirada rápida. Recomendo.”</p>
+          <div class="author">Laura • Pinhais</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato / Reserva -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title">Faça sua reserva</h2>
+      <p class="section-sub">Preencha seus dados e receba a confirmação pelo WhatsApp.</p>
+      <div class="contact-grid">
+        <form class="form" id="reserveForm">
+          <div class="row">
+            <div>
+              <label>Nome completo</label>
+              <input type="text" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div>
+              <label>WhatsApp</label>
+              <input type="tel" name="whatsapp" placeholder="(41) 9 9999-9999" required>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Retirada</label>
+              <input type="date" name="retirada" required>
+            </div>
+            <div>
+              <label>Devolução</label>
+              <input type="date" name="devolucao" required>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Modelo</label>
+              <select name="modelo" required>
+                <option value="">Selecione</option>
+                <option>CityDrive 1.0</option>
+                <option>UrbanPlus 1.6</option>
+                <option>TrailX 1.6 Turbo</option>
+              </select>
+            </div>
+            <div>
+              <label>Cidade</label>
+              <input type="text" name="cidade" placeholder="Curitiba, PR" required>
+            </div>
+          </div>
+          <label>Observações</label>
+          <textarea name="obs" rows="4" placeholder="Ex.: cadeira infantil, motorista adicional, horário de retirada"></textarea>
+          <div style="margin-top:14px;display:flex;gap:10px">
+            <button type="submit" class="btn btn-primary">Enviar reserva</button>
+            <button type="reset" class="btn btn-outline">Limpar</button>
+          </div>
+          <div id="formMsg" style="margin-top:12px;color:#9FB0C6"></div>
+        </form>
+
+        <div class="card">
+          <h3>Atendimento</h3>
+          <p>WhatsApp: (41) 9 9999-9999</p>
+          <p>E-mail: contato@nicasari.com.br</p>
+          <h3 style="margin-top:16px">Retirada e devolução</h3>
+          <p>Curitiba – Centro • Aeroporto Afonso Pena (sob consulta)</p>
+          <h3 style="margin-top:16px">Horários</h3>
+          <p>Seg–Sex: 08h–19h • Sáb: 09h–14h • Plantão 24/7</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container foot">
+      <div>
+        <h5>NICASARI Locadora</h5>
+        <p>Mobilidade descomplicada, carros revisados e atendimento humano. Dirija suas possibilidades.</p>
+      </div>
+      <div>
+        <h5>Links</h5>
+        <p><a href="#vantagens">Vantagens</a></p>
+        <p><a href="#frota">Frota</a></p>
+        <p><a href="#contato">Reservas</a></p>
+      </div>
+      <div>
+        <h5>Social</h5>
+        <p><a href="#">Instagram</a></p>
+        <p><a href="#">Facebook</a></p>
+        <p><a href="#">Google Maps</a></p>
+      </div>
+    </div>
+    <div class="container legal">
+      *Sujeito às condições da tarifa. © NICASARI Locadora de Veículos — Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script>
+    // Simula envio de reserva e monta mensagem de WhatsApp com dados
+    document.getElementById('reserveForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      const msg = `Olá, NICASARI! Quero reservar:
+- Nome: ${data.nome}
+- WhatsApp: ${data.whatsapp}
+- Retirada: ${data.retirada}
+- Devolução: ${data.devolucao}
+- Modelo: ${data.modelo}
+- Cidade: ${data.cidade}
+- Observações: ${data.obs || '—'}`;
+      document.getElementById('formMsg').textContent = 'Reserva preparada! Vamos abrir seu WhatsApp...';
+      const encoded = encodeURIComponent(msg);
+      // Substitua pelo número oficial da empresa
+      const phone = '5541999999999';
+      const url = `https://wa.me/${phone}?text=${encoded}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
